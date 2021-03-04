@@ -22,8 +22,8 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema)
 
 
-if(process.argv.length == 3){
-  console.log("Phonebook:")
+if(process.argv.length === 3){
+  console.log('Phonebook:')
 
   Person.find({}).then(result => {
     result.forEach(person => {
