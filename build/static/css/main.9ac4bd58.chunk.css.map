@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,cACG,kBAAqB,CACrB,cAAe,CACf,kBAAmB,CACnB,iBAAkB,CAClB,YAAa,CACb,kBACH","file":"main.9ac4bd58.chunk.css","sourcesContent":[".notification{\n  \tbackground: lightgrey;\n  \tfont-size: 20px;\n  \tborder-style: solid;\n  \tborder-radius: 5px;\n  \tpadding: 10px;\n  \tmargin-bottom: 10px;\n}"]}

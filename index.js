@@ -12,6 +12,8 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 const cors = require('cors')
 app.use(cors())
 
+app.use(express.static('build'))
+
 const generateId = () => {
   return Math.floor(Math.random()*100000)+1
 }
