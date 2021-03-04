@@ -12,6 +12,10 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 const cors = require('cors')
 app.use(cors())
 
+const generateId = () => {
+  return Math.floor(Math.random()*100000)+1
+}
+
 let persons = [
   {
   	name: "Henkilö A",
@@ -53,10 +57,6 @@ app.delete('/api/persons/:id', (request, response) => {
 
   response.status(204).end()
 })
-
-const generateId = () => {
-  return Math.floor(Math.random()*100000)+1
-}
 
 app.post('/api/persons', (request, response) => {
 
