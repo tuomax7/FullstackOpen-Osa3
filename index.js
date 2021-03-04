@@ -14,24 +14,16 @@ app.use(cors())
 
 app.use(express.static('build'))
 
+//MONGODB
+require('dotenv').config()
+const Person = require('./models/person')
+
+
 const generateId = () => {
   return Math.floor(Math.random()*100000)+1
 }
 
-let persons = [
-  {
-  	name: "Henkilö A",
-  	number: 100100,
-    id: generateId(),
-    date: Date()
-  },
-  {
-  	name: "Henkilö B",
-  	number: 200200,
-    id: generateId(),
-    date: Date()
-  }
-]
+let persons = []
 
 app.get('/info', (req, res) => {
   res.send(`<p>Phonebook has info for ${persons.length} people. <br>
@@ -39,18 +31,15 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-  res.json(persons)
+  Person.find({}).then(persons => {
+    res.json(persons)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
-  
-  if (person) {
+  Person.findById(request.params.id).then(person => {
     response.json(person)
-  } else {
-    response.status(404).end()
-  }
+  })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
@@ -81,22 +70,21 @@ app.post('/api/persons', (request, response) => {
   	})
   }
 
-  const person = {
+  const person = new Person({
    	name: body.name,
    	number: body.number,
-   	id: generateId(),
    	date: Date()
-  }
+  })
 
-  persons = persons.concat(person)
-
-  response.json(person)
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+  })
 
 })
 
 
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
