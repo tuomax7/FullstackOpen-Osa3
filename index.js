@@ -14,14 +14,16 @@ app.use(cors())
 
 let persons = [
   {
-  	id: 1,
   	name: "Henkilö A",
-  	number: 100100
+  	number: 100100,
+    id: generateId(),
+    date: Date()
   },
   {
-  	id: 2,
   	name: "Henkilö B",
-  	number: 200200
+  	number: 200200,
+    id: generateId(),
+    date: Date()
   }
 ]
 
